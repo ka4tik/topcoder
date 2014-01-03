@@ -1,0 +1,24 @@
+/*
+ *Kartik Singal @ ka4tik
+ */
+#include<bits/stdc++.h>
+using namespace std;
+#define s(n) scanf("%d",&n);
+class TypoCoderDiv2 
+{
+    public:
+        int count(vector<int> v)
+        {
+            int ans=0;
+            if(v[0]>=1200)
+            ans=1;
+            for(int i=1;i<v.size();i++)
+            {
+                if(v[i-1]<1200&&v[i]>=1200)
+                    ans++;
+                if(v[i-1]>=1200&&v[i]<1200)
+                    ans++;
+            }
+            return ans;
+        }
+};
