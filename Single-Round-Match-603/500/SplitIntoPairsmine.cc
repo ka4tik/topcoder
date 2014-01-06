@@ -31,27 +31,40 @@ using namespace std;
 // }}}
 #include<climits>
 
-class HouseBuilding
+class SplitIntoPairs
 {
-    public:
-        int getMinimum(vector <string> area)
+public:
+	int makepairs(vector <int> A, int X)
+	{
+        int cntpos=0,cntneg=0;
+        for(int i=0;i<A.size();i++)
         {
-            int ans=INT_MAX;
-            for(int i=0;i<area.size();i++)
-                for(int j=0;j<area[i].size();j++) area[i][j]-='0';
-            for(int i=1;i<10;i++)
-            {
-                int cans=0;
-                for(int j=0;j<area.size();j++)
-                {
-                    for(int k=0;k<area[j].size();k++)
-                    {
-                        cans+=min(abs(area[j][k]-i),abs(area[j][k]-(i-1)));
-                    }
-                }
-                ans=min(ans,cans);
-            }
-            return ans;
+            if(A[i]>0)
+                cntpos++;
+            else
+                cntneg++;
         }
+        if(cntpos%2==0&&cntneg%2==0)
+            return A.size()/2;
+
+        long long t1=INT_MAX;
+        long long t2=INT_MAX;
+        for(int i=0;i<A.size();i++)
+        {
+            if(A[i]<0)
+            {
+                t1=min(t1,(long long)-A[i]);
+            }
+            else
+            {
+                t2=min(t2,(long long)A[i]);
+            }
+        }
+        if(((-t1)*(t2))>=X)
+            return A.size()/2;
+        else
+            return (A.size()/2-1);
+
+	}
 };
 

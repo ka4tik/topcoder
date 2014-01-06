@@ -29,29 +29,26 @@
 using namespace std;
 
 // }}}
-#include<climits>
 
-class HouseBuilding
+class MaxMinTreeGame
 {
     public:
-        int getMinimum(vector <string> area)
+        vector< vector<int> > g;
+        int n;
+        int findend(vector <int> edges, vector <int> costs)
         {
-            int ans=INT_MAX;
-            for(int i=0;i<area.size();i++)
-                for(int j=0;j<area[i].size();j++) area[i][j]-='0';
-            for(int i=1;i<10;i++)
-            {
-                int cans=0;
-                for(int j=0;j<area.size();j++)
-                {
-                    for(int k=0;k<area[j].size();k++)
-                    {
-                        cans+=min(abs(area[j][k]-i),abs(area[j][k]-(i-1)));
-                    }
-                }
-                ans=min(ans,cans);
-            }
-            return ans;
+           n=costs.size();
+           vector<int> deg(n,0);
+           for(int i=0;i<edges.size();i++)
+           {
+               deg[i+1]++;
+               deg[edges[i]]++;
+           }
+           int ans=0;
+           for(int i=0;i<n;i++)
+               if(deg[i]==1)
+                   ans=max(ans,costs[i]);
+           return ans;
         }
 };
 

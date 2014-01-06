@@ -1,0 +1,122 @@
+
+// {{{ Boilerplate Code <--------------------------------------------------
+// vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
+
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <deque>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <utility>
+#include <vector>
+
+#define FOR(I,A,B) for(int I = (A); I < (B); ++I)
+#define REP(I,N)   FOR(I,0,N)
+#define ALL(A)     (A).begin(), (A).end()
+
+using namespace std;
+
+// }}}
+
+class MiddleCode
+{
+public:
+	string encode(string s)
+	{
+        string t="";
+        vector<int> removed(s.size(),0);
+        while(1)
+        {
+            int len=0;
+            for(int i=0;i<removed.size();i++)
+            {
+                if(!removed[i])
+                    len++;
+            }
+            //db(len);
+            if(len&1)
+            {
+                int tmp=len/2+1;
+                for(int i=0;i<s.size();i++)
+                {
+                    if(!removed[i])
+                    {
+                        tmp--;
+                        if(tmp==0)
+                        {
+                            t+=s[i];
+                            removed[i]=1;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                int tmp=len/2;
+                char t1,t2;
+                int index1,index2;
+                for(int i=0;i<s.size();i++)
+                {
+                    if(!removed[i])
+                    {
+                        if(tmp==0)
+                        {
+                            t1=s[i];
+                            index1=i;
+                            break;
+                        }
+                        tmp--;
+                    }
+                }
+                tmp=len/2 -1;
+                for(int i=0;i<s.size();i++)
+                {
+                    if(!removed[i])
+                    {
+                        if(tmp==0)
+                        {
+                            t2=s[i];
+                            index2=i;
+                            break;
+                        }
+                        tmp--;
+                    }
+                }
+                if(t1<t2)
+                {
+                    removed[index1]=1;
+                    t+=s[index1];
+                }
+                else
+                {
+                    removed[index2]=1;
+                    t+=s[index2];
+                }
+            }
+            int cnt=0;
+            for(int i=0;i<removed.size();i++)
+            {
+                if(removed[i]==1)
+                    cnt++;
+            }
+            if(cnt==s.size())
+                break;
+        }
+        return t;
+	}
+
+};
+

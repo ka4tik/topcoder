@@ -29,29 +29,37 @@
 using namespace std;
 
 // }}}
-#include<climits>
 
-class HouseBuilding
+class MiddleCode
 {
-    public:
-        int getMinimum(vector <string> area)
+public:
+	string encode(string s)
+	{
+        string resp;
+        int tam=s.size();
+        for(int i=0;i<s.size()!=0;i++)
         {
-            int ans=INT_MAX;
-            for(int i=0;i<area.size();i++)
-                for(int j=0;j<area[i].size();j++) area[i][j]-='0';
-            for(int i=1;i<10;i++)
+            if(s.size()%2==0)
             {
-                int cans=0;
-                for(int j=0;j<area.size();j++)
-                {
-                    for(int k=0;k<area[j].size();k++)
-                    {
-                        cans+=min(abs(area[j][k]-i),abs(area[j][k]-(i-1)));
-                    }
-                }
-                ans=min(ans,cans);
+                char temp=min(s[s.size()/2],s[(s.size()/2)-1]);
+                int pos;
+                if(temp==s[s.size()/2])
+                    pos=s.size()/2;
+                else
+                    pos=(s.size()/2)-1;
+                resp+=temp;
+                s.erase(s.begin()+pos);
             }
-            return ans;
+            else
+            {
+                char temp=s[s.size()/2];
+                resp+=temp;
+                s.erase(s.begin()+s.size()/2);
+            }
         }
+        return resp;
+            
+	}
+
 };
 

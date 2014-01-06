@@ -1,0 +1,102 @@
+// {{{ Boilerplate Code <--------------------------------------------------
+// vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
+
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <deque>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <utility>
+#include <vector>
+
+#define FOR(I,A,B) for(int I = (A); I < (B); ++I)
+#define REP(I,N)   FOR(I,0,N)
+#define ALL(A)     (A).begin(), (A).end()
+
+using namespace std;
+
+// }}}
+
+class MaxMinTreeGame
+{
+    public:
+        vector< vector<int> > g;
+        int n;
+        int findend(vector <int> edges, vector <int> costs)
+        {
+            n=edges.size()+1;
+            g.resize(n);
+            for(int i=0;i<edges.size();i++)
+            {
+                int a=i+1;
+                int b=edges[i];
+                g[a].push_back(b);
+                g[b].push_back(a);
+            }
+            int fans=0;
+            for(int root=0;root<n;root++)
+            {
+                vector<int> dist(n,-1);
+                vector<int> parent(n,-1);
+                queue<int> q;
+                q.push(root);
+                dist[root]=0;
+                while(!q.empty())
+                {
+                    int c=q.front();q.pop();
+                    for(int i=0;i<g[c].size();i++)
+                    {
+                        int v=g[c][i];
+                        if(dist[v]==-1)
+                        {
+                            q.push(v);
+                            dist[v]=dist[c]+1;
+                            parent[v]=c;
+                        }
+                    }
+                }
+                int mx=*max_element(dist.begin(),dist.end());
+                vector<int> ans(n,0);
+                for(int i=0;i<dist.size();i++)
+                {
+                    if(dist[i]==mx)
+                    {
+                        ans[i]=max(ans[i],costs[i]);
+                    }
+                }
+                for(int i=mx-1;i>=0;i--)
+                {
+                    for(int j=0;j<dist.size();j++)
+                    {
+                        if(dist[j]==i)
+                        {
+                            for(int k=0;k<g[j].size();k++)
+                            {
+                                int t=g[j][k];
+                                if(t==parent[j]) continue;
+                                ans[j]=max(ans[j],ans[t]);
+                            }
+                        }
+                    }
+                }
+                fans=max(ans[root],fans);
+            }
+            return fans;
+        }
+};
+
+
+// Edited by VimCoder 0.3.5
+// http://github.com/chazmcgarvey/vimcoder
