@@ -1,3 +1,4 @@
+
 // {{{ Boilerplate Code <--------------------------------------------------
 // vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
 
@@ -29,28 +30,35 @@ using namespace std;
 
 // }}}
 
-class MaxMinTreeGame
+class FoxAndMp3
 {
     public:
-        vector< vector<int> > g;
+        vector<string> ret;
         int n;
-        int findend(vector <int> edges, vector <int> costs)
+        string tostring(int x)
         {
-           n=costs.size();
-           vector<int> deg(n,0);
-           for(int i=0;i<edges.size();i++)
-           {
-               deg[i+1]++;
-               deg[edges[i]]++;
-           }
-           int ans=0;
-           for(int i=0;i<n;i++)
-               if(deg[i]==1)
-                   ans=max(ans,costs[i]);
-           return ans;
+            ostringstream os;
+            os<<x;
+            return os.str();
+        }
+        void rec(int x)
+        {
+            if(ret.size()==n||ret.size()==50)
+                return;
+            if(x!=0)
+                ret.push_back(tostring(x)+".mp3");
+
+            for(int i=(x==0);i<=9;i++)
+            {
+                if(x*10+i<=n)
+                    rec(x*10+i);
+            }
+        }
+        vector <string> playList(int n)
+        {
+            this->n=n;
+            rec(0);
+            return ret;
         }
 };
 
-
-// Edited by VimCoder 0.3.5
-// http://github.com/chazmcgarvey/vimcoder

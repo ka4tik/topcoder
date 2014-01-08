@@ -1,3 +1,4 @@
+
 // {{{ Boilerplate Code <--------------------------------------------------
 // vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
 
@@ -29,28 +30,16 @@ using namespace std;
 
 // }}}
 
-class MaxMinTreeGame
+class FruitTrees
 {
-    public:
-        vector< vector<int> > g;
-        int n;
-        int findend(vector <int> edges, vector <int> costs)
+public:
+	int maxDist(int apple, int kiwi, int grape)
+	{
+        int ans=min(apple,min(kiwi,grape));
+        for(int i=-kiwi;i<=kiwi;i++)
         {
-           n=costs.size();
-           vector<int> deg(n,0);
-           for(int i=0;i<edges.size();i++)
-           {
-               deg[i+1]++;
-               deg[edges[i]]++;
-           }
-           int ans=0;
-           for(int i=0;i<n;i++)
-               if(deg[i]==1)
-                   ans=max(ans,costs[i]);
-           return ans;
         }
+		return int();
+	}
 };
 
-
-// Edited by VimCoder 0.3.5
-// http://github.com/chazmcgarvey/vimcoder

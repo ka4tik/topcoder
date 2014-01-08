@@ -1,3 +1,4 @@
+
 // {{{ Boilerplate Code <--------------------------------------------------
 // vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
 
@@ -29,28 +30,22 @@ using namespace std;
 
 // }}}
 
-class MaxMinTreeGame
+class EllysPairs
 {
-    public:
-        vector< vector<int> > g;
-        int n;
-        int findend(vector <int> edges, vector <int> costs)
+public:
+#include<climits>
+	int getDifference(vector <int> know)
+	{
+        sort(know.begin(),know.end());
+        vector<int> rev=know;
+        reverse(rev.begin(),rev.end());
+        int mx=INT_MIN,mn=INT_MAX;
+        for(int i=0;i<know.size();i++)
         {
-           n=costs.size();
-           vector<int> deg(n,0);
-           for(int i=0;i<edges.size();i++)
-           {
-               deg[i+1]++;
-               deg[edges[i]]++;
-           }
-           int ans=0;
-           for(int i=0;i<n;i++)
-               if(deg[i]==1)
-                   ans=max(ans,costs[i]);
-           return ans;
+            mx=max(mx,know[i]+rev[i]);
+            mn=min(mn,know[i]+rev[i]);
         }
+        return mx-mn;
+	}
 };
 
-
-// Edited by VimCoder 0.3.5
-// http://github.com/chazmcgarvey/vimcoder

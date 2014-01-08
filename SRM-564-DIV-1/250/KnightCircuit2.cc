@@ -1,3 +1,4 @@
+
 // {{{ Boilerplate Code <--------------------------------------------------
 // vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
 
@@ -29,28 +30,25 @@ using namespace std;
 
 // }}}
 
-class MaxMinTreeGame
+class KnightCircuit2
 {
-    public:
-        vector< vector<int> > g;
-        int n;
-        int findend(vector <int> edges, vector <int> costs)
+public:
+	int maxSize(int w, int h)
+	{
+        if(h<w)
+            swap(h,w);
+
+        // w is smallest side
+        if(w==3&&h==3) return 8;
+        if(w>=3) return w*h;
+
+        if(w==1) return 1;
+
+        if(w==2)
         {
-           n=costs.size();
-           vector<int> deg(n,0);
-           for(int i=0;i<edges.size();i++)
-           {
-               deg[i+1]++;
-               deg[edges[i]]++;
-           }
-           int ans=0;
-           for(int i=0;i<n;i++)
-               if(deg[i]==1)
-                   ans=max(ans,costs[i]);
-           return ans;
+            return (h+1)/2;
         }
+
+	}
 };
 
-
-// Edited by VimCoder 0.3.5
-// http://github.com/chazmcgarvey/vimcoder
