@@ -1,0 +1,105 @@
+
+// {{{ Boilerplate Code <--------------------------------------------------
+// vim:filetype=cpp:foldmethod=marker:foldmarker={{{,}}}
+
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <deque>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <utility>
+#include <vector>
+
+#define FOR(I,A,B) for(int I = (A); I < (B); ++I)
+#define REP(I,N)   FOR(I,0,N)
+#define ALL(A)     (A).begin(), (A).end()
+
+using namespace std;
+
+// }}}
+
+class LittleElephantAndXor
+{
+    public:
+#define ll long long
+        int A,B,C;
+        string a,b,c;
+        string tobinary(int x)
+        {
+            string ret;
+            while(x!=0)
+            {
+                ret=(char)(x%2+'0')+ret;
+                x>>=1;
+            }
+            while(ret.size()<32)
+                ret="0"+ret;
+            return ret;
+        }
+        ll dp[32][2][2][2];
+        bool done[32][2][2][2];
+        ll f(int t,int flagA,int flagB,int flagC)
+        {
+            if(t==-1) return 1;
+
+            if(done[t][flagA][flagB][flagC]) 
+                return dp[t][flagA][flagB][flagC];
+
+
+            ll ans=0;
+            for(int i=0;i<2;i++)
+            {
+                for(int j=0;j<2;j++)
+                {
+                    if(flagA&&i>(a[t]-'0'))
+                        continue;
+                    if(flagB&&j>(b[t]-'0'))
+                        continue;
+                    int z=i^j;
+                    if(flagC&&z>(c[t]-'0'))
+                        continue;
+                    int nflagA=(flagA&&a[t]==i+'0');
+                    int nflagB=(flagB&&b[t]==j+'0');
+                    int nflagC=(flagC&&c[t]==z+'0');
+
+                    ans+=f(t-1,nflagA,nflagB,nflagC);
+                }
+            }
+            done[t][flagA][flagB][flagC]=1;
+            return dp[t][flagA][flagB][flagC]=ans;
+        }
+        long long getNumber(int A, int B, int C)
+        {
+            this->A=A;
+            this->B=B;
+            this->C=C;
+            if(A>B) swap(A,B);
+            a=tobinary(A);
+            b=tobinary(B);
+            c=tobinary(C);
+            reverse(a.begin(),a.end());
+            reverse(b.begin(),b.end());
+            reverse(c.begin(),c.end());
+            for(int i=0;i<32;i++)
+                for(int j=0;j<2;j++)
+                    for(int k=0;k<2;k++)
+                        for(int l=0;l<2;l++)
+                            done[i][j][k][l]=0;
+
+            return f(30,1,1,1);
+
+        }
+};
+
