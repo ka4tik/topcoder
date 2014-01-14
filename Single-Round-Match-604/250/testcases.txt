@@ -1,0 +1,12 @@
+1
+{"tokyo", "kyoto"}
+0
+{"aaaaa", "bbbbb"}
+1
+{"ababab","bababa","aaabbb"}
+3
+{"eel", "ele", "lee"}
+6
+{"aaa", "aab", "aba", "abb", "baa", "bab", "bba", "bbb"}
+0
+{"top","coder"}
