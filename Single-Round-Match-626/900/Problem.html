@@ -1,0 +1,32 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+Raymond has a rectangle with dimensions <b>sideA</b> times <b>sideB</b>.
+The sides of the rectangle are perfect mirrors.
+There is a directional light source in one corner of the rectangle.
+Raymond can point the light source in any direction.
+(I.e., he can choose any angle strictly between 0 and 90 degrees. The chosen angle does not have to be an integer.)
+When Raymond turns the light source on, it will shine a ray of light into the rectangle.
+The light follows the law of reflection: whenever it hits a mirror, the angle of incidence equals the angle of reflection.
+</p>
+
+<p>
+Raymond's goal is to shine the ray of light in the following way:
+<ul>
+<li>The light must bounce off the sides of the rectangle exactly <b>bounces</b> times, without hitting a corner of the rectangle.</li>
+<li>After exactly that many bounces, the light must reach the opposite corner.</li>
+</ul>
+</p>
+
+<p>
+Raymond found all solutions to the above problem.
+In other words, he found all choices of the initial angle that lead to the desired outcome.
+He then took a sheet of paper.
+For each of the solutions, he computed the square of the distance the light traveled before hitting the opposite corner, and he wrote down the result.
+(Note that the squared distance is always an integer.)
+</p>
+
+<p>
+You are given the ints <b>sideA</b>, <b>sideB</b>, and <b>bounces</b>.
+Return the sum of all numbers on Raymond's paper, modulo 10^9 + 7.
+</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>ReflectiveRectangle</td></tr><tr><td>Method:</td><td>findSum</td></tr><tr><td>Parameters:</td><td>int, int, int</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int findSum(int sideA, int sideB, int bounces)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>sizeA</b> will be between 1 and 10^6, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>sizeB</b> will be between 1 and 10^6, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>bounces</b> will be between 0 and 10^9, inclusive. </td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>4</pre></td></tr><tr><td><pre>0</pre></td></tr></table></td></tr><tr><td><pre>Returns: 25</pre></td></tr><tr><td><table><tr><td colspan="2">As there should be 0 bounces, Raymond has to point the light source directly at the opposite corner.
+The squared length of that light beam will be 3^2 + 4^2 = 25.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>3</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: 180</pre></td></tr><tr><td><table><tr><td colspan="2">There are two possible paths, each with squared length 90. <br></br>
+<img src="http://i1370.photobucket.com/albums/ag268/lg52931/reflect_zps5e6b51cb.png?t=1403937406"></img></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>13</pre></td></tr><tr><td><pre>17</pre></td></tr><tr><td><pre>1</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">Sometimes, it is not possible to find any valid path that satisfies the conditions. </td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>59325</pre></td></tr><tr><td><pre>31785</pre></td></tr><tr><td><pre>262142</pre></td></tr></table></td></tr><tr><td><pre>Returns: 48032850</pre></td></tr><tr><td><table><tr><td colspan="2">Don't forget to take the answer modulo 10^9+7.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>1000000</pre></td></tr><tr><td><pre>1000000</pre></td></tr><tr><td><pre>1000000000</pre></td></tr></table></td></tr><tr><td><pre>Returns: 145972110</pre></td></tr><tr><td><table><tr><td colspan="2">Be careful with overflow.</td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
